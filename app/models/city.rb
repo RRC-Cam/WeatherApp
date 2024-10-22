@@ -6,10 +6,17 @@ class City < ApplicationRecord
     data = service.fetch_weather
 
     if data
+      # Extract weather information
+      temp = data['main']['temp']
+      description = data['weather'][0]['description']
+
+      # Create a new weather entry for this city
       self.weathers.create(
-        temperature: data['main']['temp'],
-        weather_description: data['weather'][0]['description']
+        temperature: temp,
+        weather_description: description
       )
+    else
+      puts "Failed to fetch weather data for #{self.name}"
     end
   end
 end
