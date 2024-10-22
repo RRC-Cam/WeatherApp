@@ -7,3 +7,10 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+cities = ["New York", "Los Angeles", "Toronto", "London", "Tokyo"]
+
+cities.each do |city_name|
+  city = City.find_or_create_by(name: city_name)
+  city.update_weather
+end
