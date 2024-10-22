@@ -1,0 +1,14 @@
+<h1>Weather for <%= @city.name %></h1>
+
+<ul>
+  <% @city.weathers.each do |weather| %>
+    <li>
+      Temperature: <%= weather.temperature %> °C
+    </li>
+    <li>
+      Description: <%= weather.weather_description %>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to 'Back to Cities', cities_path %>
