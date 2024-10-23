@@ -1,9 +1,9 @@
 class CitiesController < ApplicationController
   def index
     if params[:q].present?
-      @cities = City.where("name LIKE ?", "%#{params[:q]}%").page(params[:page]).per(5)
+      @cities = City.where("name LIKE ?", "%#{params[:q]}%").page(params[:page]).per(18)
     else
-      @cities = City.page(params[:page]).per(5)
+      @cities = City.page(params[:page]).per(18)
     end
 
     # Filter the permitted parameters for pagination within the action

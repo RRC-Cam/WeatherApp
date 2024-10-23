@@ -1,3 +1,27 @@
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Weather Checker</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <%= link_to 'Home', root_path, class: 'nav-link active', aria: { current: 'page' } %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'About', about_index_path, class: 'nav-link' %>
+        </li>
+      </ul>
+      <%= form_with url: cities_path, method: :get, local: true, class: "d-flex", role: "search" do %>
+        <%= text_field_tag :q, params[:q], class: "form-control me-2", placeholder: "Search for a city", aria: { label: "Search" } %>
+        <%= submit_tag "Search", class: "btn btn-outline-success" %>
+      <% end %>
+    </div>
+  </div>
+</nav>
+
 <div class="container">
   <h1 class="my-4">About This Project</h1>
   <p>This application pulls weather data from the <a href="https://openweathermap.org/">OpenWeather API</a>. The data is refreshed periodically and includes current weather information for several cities.</p>

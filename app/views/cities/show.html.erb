@@ -1,3 +1,28 @@
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Weather Checker</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <%= link_to 'Home', root_path, class: 'nav-link active', aria: { current: 'page' } %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'About', about_index_path, class: 'nav-link' %>
+        </li>
+      </ul>
+      <%= form_with url: cities_path, method: :get, local: true, class: "d-flex", role: "search" do %>
+        <%= text_field_tag :q, params[:q], class: "form-control me-2", placeholder: "Search for a city", aria: { label: "Search" } %>
+        <%= submit_tag "Search", class: "btn btn-outline-success" %>
+      <% end %>
+    </div>
+  </div>
+</nav>
+
+
 <div class="container">
   <h1 class="my-4 text-center">Weather for <%= @city.name %></h1>
 
@@ -7,17 +32,37 @@
         <div class="card-body">
           <h5 class="card-title">Weather Information</h5>
           <ul class="list-group list-group-flush">
-            <% @city.weathers.each do |weather| %>
-              <li class="list-group-item">
-                <strong>Temperature:</strong> <%= weather.temperature %> °C
-              </li>
-              <li class="list-group-item">
-                <strong>Description:</strong> <%= weather.weather_description %>
-              </li>
+            <% if @city.weathers.any? %>
+              <% @city.weathers.each do |weather| %>
+                <li class="list-group-item">
+                  <strong>Temperature:</strong> <%= weather.temperature %> °C
+                </li>
+                <li class="list-group-item">
+                  <strong>Description:</strong> <%= weather.weather_description %>
+                </li>
+              <% end %>
+            <% else %>
+              <li class="list-group-item">No weather data available for <%= @city.name %>.</li>
             <% end %>
           </ul>
         </div>
       </div>
+
+      <!-- Conditional -->
+      <% if @city.weathers.any? %>
+        <% last_weather = @city.weathers.last %>
+        <div class="alert alert-info mt-3">
+          <% if last_weather.temperature > 30 %>
+            <p>It's hot in <%= @city.name %> today! Stay hydrated.</p>
+          <% elsif last_weather.temperature < 0 %>
+            <p>It's freezing in <%= @city.name %> today! Stay warm.</p>
+          <% elsif last_weather.temperature >= 0 && last_weather.temperature < 10 %>
+            <p>It's chilly in <%= @city.name %>. Better put on a jacket.</p>
+          <% else %>
+            <p>The weather is moderate in <%= @city.name %>.</p>
+          <% end %>
+        </div>
+      <% end %>
     </div>
   </div>
 
