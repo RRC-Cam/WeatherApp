@@ -1,22 +1,19 @@
 class City < ApplicationRecord
-  has_many :weathers
+  has_many :weathers, dependent: :destroy
 
   def update_weather
     service = OpenWeatherService.new(self.name)
     data = service.fetch_weather
 
     if data
-      # Extract weather information
-      temp = data['main']['temp']
-      description = data['weather'][0]['description']
+      # Delete previous weather data for this city
+      self.weathers.destroy_all
 
-      # Create a new weather entry for this city
+      # Create a new weather record
       self.weathers.create(
-        temperature: temp,
-        weather_description: description
+        temperature: data['main']['temp'],
+        weather_description: data['weather'][0]['description']
       )
-    else
-      puts "Failed to fetch weather data for #{self.name}"
     end
   end
 end
