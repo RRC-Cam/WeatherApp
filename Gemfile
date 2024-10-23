@@ -21,6 +21,9 @@ gem "jbuilder"
 gem 'http'
 gem 'dotenv-rails', groups: [:development, :test]
 gem 'kaminari'
+gem 'bootstrap', '~> 5.3.0'
+gem 'sassc-rails'
+
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
