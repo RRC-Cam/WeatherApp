@@ -12,7 +12,7 @@ require 'net/http'
 require 'json'
 
 # Your OpenWeather API key
-openweather_api_key = "3448845624d0c58ac787549dffb44cb2"
+openweather_api_key = "api_key"
 
 # Latitude and Longitude for North America (centered around central US)
 lat = 39.8283   # Example latitude (central US)
