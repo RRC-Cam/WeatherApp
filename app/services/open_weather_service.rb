@@ -5,7 +5,7 @@ class OpenWeatherService
 
   def initialize(city_name)
     @city_name = city_name
-    @api_key = ENV['3448845624d0c58ac787549dffb44cb2']
+    @api_key = ENV['api_key']
   end
 
   def fetch_weather
