@@ -9,7 +9,7 @@ class City < ApplicationRecord
 
     def update_weather
       # Fetch weather data from OpenWeather API
-      api_key = "3448845624d0c58ac787549dffb44cb2"
+      api_key = "api_key"
       uri = URI("https://api.openweathermap.org/data/2.5/weather?q=#{self.name}&appid=#{api_key}&units=metric")
       response = Net::HTTP.get(uri)
       weather_data = JSON.parse(response)
